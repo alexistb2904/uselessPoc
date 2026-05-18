@@ -49,11 +49,11 @@ EEG_SOURCE=lsl uvicorn backend.main:app --host 0.0.0.0 --port 8000
 
 ---
 
-## Brancher le vrai casque (sans app Windows)
+## Brancher le vrai casque
 
 Le casque X.on communique en **BLE 5.0**.  
 L'app Windows officielle sert surtout à streamer en LSL et checker l'impédance.  
-Sur Linux, l'app **Android X.on** fait la même chose — elle est suffisante.
+Sur Linux, l'app **Android X.on** fait la même chose.
 
 ### Prérequis Linux
 
