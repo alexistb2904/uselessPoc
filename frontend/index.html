@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>X.on EEG &mdash; Acquisition</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+</head>
+
+<body>
+    <div class="titlebar">
+        <span class="title">X.on EEG &mdash; Acquisition</span>
+        <span class="meta" id="titleMeta">mock &middot; 250 Hz &middot; A1/A2</span>
+    </div>
+
+    <div class="toolbar">
+        <button id="btnConnect" class="tb-btn" type="button">Connecter</button>
+        <span class="tb-sep"></span>
+        <button id="btnStart" class="tb-btn" type="button">D&eacute;marrer</button>
+        <button id="btnStop" class="tb-btn" type="button" disabled>Arr&ecirc;ter</button>
+        <input id="markerLabel" class="tb-input" type="text" placeholder="label&hellip;" value="event" />
+        <button id="btnMarker" class="tb-btn" type="button">+ Marqueur</button>
+        <span class="tb-sep"></span>
+        <button id="btnImpedance" class="tb-btn" type="button">Imp&eacute;dance</button>
+        <span class="tb-sep"></span>
+        <button id="btnExport" class="tb-btn" type="button">Exporter Excel</button>
+        <button id="btnReset" class="tb-btn" type="button">R&eacute;initialiser</button>
+
+        <span class="tb-spacer"></span>
+        <label class="tb-label" for="scaleSelect">&Eacute;chelle</label>
+        <select id="scaleSelect" class="tb-select">
+            <option value="50">&plusmn;50 &micro;V</option>
+            <option value="100" selected>&plusmn;100 &micro;V</option>
+            <option value="200">&plusmn;200 &micro;V</option>
+            <option value="500">&plusmn;500 &micro;V</option>
+        </select>
+    </div>
+
+    <main class="workspace">
+        <section class="trace-panel">
+            <div class="panel-title">Trac&eacute; multi-canaux</div>
+            <div class="trace-body">
+                <div class="channel-rail" id="channelRail"></div>
+                <div class="canvas-wrap">
+                    <canvas id="eegCanvas"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <aside class="side-panel">
+            <section class="card">
+                <div class="panel-title">Session</div>
+                <table class="info-table">
+                    <tbody>
+                        <tr>
+                            <th>&Eacute;tat</th>
+                            <td id="sessState">idle</td>
+                        </tr>
+                        <tr>
+                            <th>D&eacute;but</th>
+                            <td id="sessStart">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <th>Dur&eacute;e</th>
+                            <td id="sessDuration">00:00:00</td>
+                        </tr>
+                        <tr>
+                            <th>Samples</th>
+                            <td id="sessSamples">0</td>
+                        </tr>
+                        <tr>
+                            <th>Marqueurs</th>
+                            <td id="sessMarkers">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="card">
+                <div class="panel-title">Flux</div>
+                <table class="info-table">
+                    <tbody>
+                        <tr>
+                            <th>Source</th>
+                            <td id="infoSource">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <th>Fs</th>
+                            <td id="infoFs">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <th>Canaux</th>
+                            <td id="infoChannels">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <th>R&eacute;f&eacute;rence</th>
+                            <td id="infoRef">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <th>Unit&eacute;</th>
+                            <td id="infoUnit">&micro;V</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="card">
+                <div class="panel-title">Marqueurs</div>
+                <div class="markers-wrap">
+                    <table class="markers-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Label</th>
+                            </tr>
+                        </thead>
+                        <tbody id="markersBody"></tbody>
+                    </table>
+                </div>
+            </section>
+        </aside>
+    </main>
+
+    <div class="statusbar">
+        <span class="status-item">
+            <span class="status-dot" id="connDot"></span>
+            <span id="connLabel">D&eacute;connect&eacute;</span>
+        </span>
+        <span class="status-sep">|</span>
+        <span class="status-item" id="stStream">Stream: &mdash;</span>
+        <span class="status-sep">|</span>
+        <span class="status-item" id="stRec">REC: idle</span>
+        <span class="status-sep">|</span>
+        <span class="status-item" id="stClock">00:00:00</span>
+        <span class="status-spacer"></span>
+        <span class="status-item" id="stRate">0 chunks/s</span>
+    </div>
+
+    <!--
+      type="module" active les ES modules (import/export).
+      Les modules sont chargés en différé (équivalent defer) et ont
+      leur propre scope : pas de pollution de window.
+    -->
+    <script type="module" src="/static/app.js"></script>
+</body>
+
+</html>
