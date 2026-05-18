@@ -3,6 +3,7 @@
 Interface web pour le casque EEG [X.on](https://xon-eeg.com/) sur Linux.  
 Backend Python (FastAPI) + frontend HTML/CSS/JS vanilla.  
 Mode mock intégré — le vrai casque se branche via LSL sans app Windows.
+<img width="1826" height="944" alt="image" src="https://github.com/user-attachments/assets/38734de9-5518-4612-b509-b4a1cb9abc86" />
 
 ---
 
